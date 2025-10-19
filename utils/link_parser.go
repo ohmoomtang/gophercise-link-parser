@@ -2,6 +2,7 @@ package utils
 
 import (
 	"io"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -15,7 +16,7 @@ func ParseLink(htmlReader io.Reader) ([]Link, error) {
 	for n := range doc.Descendants() {
 		var link Link
 		if n.Type == html.TextNode && n.Parent.Data == "a" {
-			link.Text = n.Data
+			link.Text = strings.TrimSpace(n.Data)
 			for _, a := range n.Parent.Attr {
 				if a.Key == "href" {
 					link.Href = a.Val
