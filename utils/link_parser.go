@@ -15,18 +15,31 @@ func ParseLink(htmlReader io.Reader) ([]Link, error) {
 	}
 	for n := range doc.Descendants() {
 		var link Link
-		if n.Type == html.TextNode && n.Parent.Data == "a" {
-			link.Text = strings.TrimSpace(n.Data)
-			for _, a := range n.Parent.Attr {
+		var innerText string
+		if n.Type == html.ElementNode && n.Data == "a" {
+			for _, a := range n.Attr {
 				if a.Key == "href" {
 					link.Href = a.Val
 				}
 			}
+			for ch := range n.ChildNodes() {
+				switch ch.Type {
+				case html.TextNode:
+					innerText += ch.Data
+				case html.ElementNode:
+					for descCh := range ch.Descendants() {
+						if descCh.Type == html.TextNode {
+							innerText += descCh.Data
+						}
+					}
+				default:
+				}
+			}
+			link.Text = strings.TrimSpace(innerText)
 		}
 		if link.Href != "" && link.Text != "" {
 			links = append(links, link)
 		}
-
 	}
 	return links, nil
 }

@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	htmlFile, err := utils.ReadHTMLFile("ex1.html")
+	htmlFile, err := utils.ReadHTMLFile("ex2.html")
 	if err != nil {
 		panic(err)
 	}
