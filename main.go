@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 
@@ -8,7 +9,13 @@ import (
 )
 
 func main() {
-	htmlFile, err := utils.ReadHTMLFile("ex2.html")
+	filename := flag.String("filename", "", "Enter specific HTML file name in full path")
+	flag.Parse()
+	if *filename == "" {
+		fmt.Println("Please input HTML file name")
+		return
+	}
+	htmlFile, err := utils.ReadHTMLFile(*filename)
 	if err != nil {
 		panic(err)
 	}
