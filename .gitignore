@@ -1,17 +1,44 @@
-# Binaries for programs and plugins
+# Binaries for the current project and other Go projects
 *.exe
 *.dll
 *.so
 *.dylib
+*.o
+*.a
+*.bin
 
-# Test binary, build with `go test -c`
+# Compiled binaries for cross-compilation
+# For example, if you're building for Linux on a Windows machine
+# you might have a 'linux_amd64' directory
+*/bin/
+
+# Dependency caches
+# Go module cache (if not using vendoring)
+# This can be a large directory and is usually not committed
+.go/
+vendor/ # If you are using vendoring, this should generally be committed.
+        # Uncomment this line only if you explicitly want to ignore vendored dependencies.
+
+# Test caches
+# Go test cache
 *.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
-.glide/
+# Editor-specific files
+.idea/ # IntelliJ IDEA / GoLand
+.vscode/ # VS Code
+.sublime/ # Sublime Text
+*.swp # Vim swap files
+*.bak # Backup files
 
-# Ignore tmp files
-tmp/*
+# Operating System files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Log files
+*.log
+
+# Environment variables or configuration files that might contain sensitive information
+.env
+.env.*
+config.local.yaml
